@@ -8,18 +8,12 @@ void touch(const char* filename, bool safe)
 
         if(file != -1)
         {
-            
-            struct stat buf;
-
-            int stat_ret = fstat(file, &buf);
-        
-            if(stat_ret != -1)
+                
+            int ret = utime(filename, NULL);
+            if(ret == -1)
             {
-
-                //printf("access time : %s\r\n", buf.st_atime);
-                //printf("modify time : %s\r\n", buf.st_mtime);
-                //printf("change time : %s\r\n", buf.st_ctime);
-
+                printf("update file access time failed \r\n");
+                exit(-1);
             }
         }
 
@@ -31,11 +25,18 @@ void touch(const char* filename, bool safe)
 
         if(file != -1)
         {
-            printf("file does not exists but created now");
+            int ret = utime(filename, NULL);
+            if(ret == -1)
+            {
+
+                printf("update file access time failed \r\n");
+                exit(-1);
+            }
         }
         else
         {
-            printf("fiel does not exists and file created failed");
+            printf("create file failed");
+            exit(0);
         }
     }
 }
@@ -44,10 +45,8 @@ void touch(const char* filename, bool safe)
 int main(int argc, char ** argv)
 {
     char * filename = argv[1];
-
-    printf("%s\r\n", filename);
     
-    touch(filename, true);
+    touch(filename, false);
     
     return 0;
 }

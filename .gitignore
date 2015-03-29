@@ -5,5 +5,7 @@
 build
 *.out
 *.a
+ls
+touch
 
 
