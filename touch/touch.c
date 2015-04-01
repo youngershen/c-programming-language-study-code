@@ -8,7 +8,6 @@ void touch(const char* filename, bool safe)
 
         if(file != -1)
         {
-                
             int ret = utime(filename, NULL);
             if(ret == -1)
             {
@@ -16,8 +15,6 @@ void touch(const char* filename, bool safe)
                 exit(-1);
             }
         }
-
-
     }
     else
     {
@@ -28,7 +25,6 @@ void touch(const char* filename, bool safe)
             int ret = utime(filename, NULL);
             if(ret == -1)
             {
-
                 printf("update file access time failed \r\n");
                 exit(-1);
             }
@@ -41,12 +37,9 @@ void touch(const char* filename, bool safe)
     }
 }
 
-
 int main(int argc, char ** argv)
 {
     char * filename = argv[1];
-    
     touch(filename, false);
-    
     return 0;
 }
